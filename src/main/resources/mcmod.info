@@ -1,0 +1,21 @@
+{
+	"modListVersion": 2,
+	"modList": [{
+		"modid": "${modId}",
+		"name": "${modName}",
+		"description": "InCommand does several small tweaks to commands, like letting you use /enchant and /effect\nwith words instead, /enchant clear to remove all enchants from an item, and changing the level of an\nexisting enchantment on an item (including to 0), and allowing Roman numerals for the enchant level.",
+		"version": "${modVersion}",
+		"mcversion": "${minecraftVersion}",
+		"url": "",
+		"updateUrl": "",
+		"authorList": ["Kitty S. Lillian"],
+		"credits": "Special Thanks to the Legacy Modding Discord!",
+		"logoFile": "",
+		"screenshots": [],
+		"parent": "",
+		"requiredMods": [],
+		"dependencies": [],
+		"dependants": [],
+		"useDependencyInformation": false
+	}]
+}
