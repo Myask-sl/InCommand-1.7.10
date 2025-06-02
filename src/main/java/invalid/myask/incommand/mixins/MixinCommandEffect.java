@@ -39,4 +39,6 @@ public abstract class MixinCommandEffect extends CommandBase {
             nameAndNumber.cancel();
         }
     }
+
+    //TODO: add particle disable!
 }
