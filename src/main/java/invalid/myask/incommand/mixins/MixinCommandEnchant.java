@@ -2,18 +2,17 @@ package invalid.myask.incommand.mixins;
 
 import java.util.List;
 
-import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
-import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
 import com.llamalad7.mixinextras.sugar.Local;
+import net.minecraft.entity.player.EntityPlayerMP;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.ModifyArg;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.CommandEnchant;
-import net.minecraft.command.ICommand;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentHelper;
@@ -42,9 +41,9 @@ public abstract class MixinCommandEnchant extends CommandBase {
             if (args.length >= 3)
                 args[2] = IDDictionary.lookupRoman(args[2]);
 
-            ItemStack itemstack = getCommandSenderAsPlayer(sender).getCurrentEquippedItem();
-            if (itemstack == null) return;
-            NBTTagList enchantList = itemstack.getEnchantmentTagList();
+            ItemStack inCommandStack = getCommandSenderAsPlayer(sender).getCurrentEquippedItem();
+            if (inCommandStack == null) return;
+            NBTTagList enchantList = inCommandStack.getEnchantmentTagList();
             int targetID = parseInt(sender, args[1]);
             if (Config.enchant_clear_enable && "-0".equalsIgnoreCase(args[1])) {
                 if (enchantList != null) {
@@ -53,18 +52,18 @@ public abstract class MixinCommandEnchant extends CommandBase {
                         enchantList.removeTag(k);
                     }
                      */
-                    itemstack.getTagCompound().removeTag("ench");
+                    inCommandStack.getTagCompound().removeTag("ench");
                     func_152373_a(sender, this, "commands.enchant.clear.success");
                 }
                 nameAndNumber.cancel();
-            } else if (EnchantmentHelper.getEnchantmentLevel(targetID, itemstack) > 0) {
+            } else if (EnchantmentHelper.getEnchantmentLevel(targetID, inCommandStack) > 0) {
                 for (int i = 0; i < enchantList.tagCount(); i++) {
                     if (enchantList.getCompoundTagAt(i).getShort("id") == targetID) { //TODO: check endlessIDs for issue.
                         enchantList.removeTag(i);
                     }
                 }
                 if (enchantList.tagCount() == 0)
-                    itemstack.getTagCompound().removeTag("ench");
+                    inCommandStack.getTagCompound().removeTag("ench");
             }
             if (args.length >= 3 && parseInt(sender, args[2]) == 0) {
                 func_152373_a(sender, this, "commands.enchant.zero.success");
@@ -73,17 +72,29 @@ public abstract class MixinCommandEnchant extends CommandBase {
         }
     }
 
-    @WrapOperation(method = "processCommand",
+    @ModifyArg(method = "processCommand",
         at= @At(value = "INVOKE",
-        target = "Lnet/minecraft/command/CommandEnchant;func_152373_a(Lnet/minecraft/command/ICommandSender;Lnet/minecraft/command/ICommand;Ljava/lang/String;[Ljava/lang/Object;)V")
+        target = "Lnet/minecraft/command/CommandEnchant;func_152373_a(Lnet/minecraft/command/ICommandSender;Lnet/minecraft/command/ICommand;Ljava/lang/String;[Ljava/lang/Object;)V"),
+        require = 1
     )
-    private void improveMessage (ICommandSender iCommandSender, ICommand iCommand, String s, Object[] objects, Operation<Void> original,
-                                 @Local ItemStack itemstack, @Local Enchantment enchantment, @Local(ordinal = 1) int level) {
-        original.call(iCommandSender, iCommand, "commands.enchant.enchant.verbose", new Object[] {
-            iCommandSender.getCommandSenderName(),
-            StatCollector.translateToLocal(itemstack.getUnlocalizedName()),
-            enchantment.getTranslatedName(level)});
-        //Enchanting by %1$s of %2$s with %3$s succeeded
+    private String improveMessage (String original) {
+        return "commands.enchant.success.verbose";
+    }
+
+    @ModifyArg(method = "processCommand",
+        at= @At(value = "INVOKE",
+            target = "Lnet/minecraft/command/CommandEnchant;func_152373_a(Lnet/minecraft/command/ICommandSender;Lnet/minecraft/command/ICommand;Ljava/lang/String;[Ljava/lang/Object;)V"),
+        require = 1,
+        index = 3
+    )
+    private Object[] improveMessage2 (Object[] objects, @Local(argsOnly = true) ICommandSender sender,
+    @Local(name="entityplayermp") EntityPlayerMP playerMP, @Local(name="enchantment") Enchantment enchantment, @Local(name="j", ordinal = 1) int level) {
+        return new Object[] {
+            sender.getCommandSenderName(),
+            playerMP.getCommandSenderName(),
+            StatCollector.translateToLocal(playerMP.getCurrentEquippedItem().getDisplayName()),
+            enchantment.getTranslatedName(level)};
+        //Enchanting by %1$s of %3$s held by %2$s with %4$s succeeded
     }
 
 

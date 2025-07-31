@@ -1,6 +1,6 @@
 commands.enchant.clear.success=Full enchantment removal for held item succeeded
 commands.enchant.zero.success=Single enchantment removal for held item succeeded
-commands.enchant.enchant.verbose=Enchanting by %1$s of %2$s with %3$s succeeded
+commands.enchant.success.verbose=Enchanting by %1$s of %3$s held by %2$s with %4$s succeeded
 
 commands.iron.usage="/iron (no arguments)": drops four iron ingots. 10 minute (12000 tick) default cooldown.
 commands.iron.failure.hasty=/iron not cooled down yet!
