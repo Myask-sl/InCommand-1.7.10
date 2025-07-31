@@ -23,7 +23,8 @@ public class CommandFakeEnchant extends CommandTabOnly {
     public List<String> addTabCompletionOptions(ICommandSender sender, String[] args) {
          List<String> answers = new ArrayList<>();
          if (args.length == 2) {
-             if (IDDictionary.enchLocalDict.isEmpty()) IDDictionary.initLocalEnchDict();
+             if (IDDictionary.enchLocalDict.isEmpty() || IDDictionary.languageChanged(IDDictionary.enchLang))
+                 IDDictionary.initLocalEnchDict();
              answers = getListOfStringsFromIterableMatchingLastWord(args, IDDictionary.enchLocalDict.keySet());
          }
          return answers;

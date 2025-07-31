@@ -133,7 +133,7 @@ public class IDDictionary {
         else return arg;
     }
 
-    private static boolean languageChanged(Language lang) {
+    public static boolean languageChanged(Language lang) {
         return (Minecraft.getMinecraft().getLanguageManager().getCurrentLanguage() != lang);
     }
 

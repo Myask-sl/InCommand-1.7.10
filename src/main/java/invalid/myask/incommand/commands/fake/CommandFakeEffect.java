@@ -22,7 +22,8 @@ public class CommandFakeEffect extends CommandTabOnly {
     public List<String> addTabCompletionOptions(ICommandSender sender, String[] args) {
          List<String> answers = new ArrayList<>();
          if (args.length == 2) {
-             if (IDDictionary.effLocalDict.isEmpty()) IDDictionary.initLocalEffDict();
+             if (IDDictionary.effLocalDict.isEmpty() || IDDictionary.languageChanged(IDDictionary.effLang))
+                 IDDictionary.initLocalEffDict();
              answers = getListOfStringsFromIterableMatchingLastWord(args, IDDictionary.effLocalDict.keySet());
          }
          return answers;
