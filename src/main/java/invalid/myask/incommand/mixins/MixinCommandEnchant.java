@@ -2,22 +2,26 @@ package invalid.myask.incommand.mixins;
 
 import java.util.List;
 
-import invalid.myask.incommand.Config;
-import net.minecraft.command.CommandBase;
-import net.minecraft.command.CommandEnchant;
-
-import net.minecraft.command.ICommandSender;
-import net.minecraft.enchantment.EnchantmentHelper;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTTagList;
+import com.llamalad7.mixinextras.injector.wrapoperation.Operation;
+import com.llamalad7.mixinextras.injector.wrapoperation.WrapOperation;
+import com.llamalad7.mixinextras.sugar.Local;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-import com.llamalad7.mixinextras.sugar.Local;
+import net.minecraft.command.CommandBase;
+import net.minecraft.command.CommandEnchant;
+import net.minecraft.command.ICommand;
+import net.minecraft.command.ICommandSender;
+import net.minecraft.enchantment.Enchantment;
+import net.minecraft.enchantment.EnchantmentHelper;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagList;
+import net.minecraft.util.StatCollector;
 
+import invalid.myask.incommand.Config;
 import invalid.myask.incommand.IDDictionary;
 
 @Mixin(CommandEnchant.class)
@@ -69,28 +73,20 @@ public abstract class MixinCommandEnchant extends CommandBase {
         }
     }
 
-/*
-    @Inject(method = "processCommand(Lnet/minecraft/command/ICommandSender;[Ljava/lang/String;)V",
-        at = @At(value = "INVOKE", target = "Lnet/minecraft/item/ItemStack;getEnchantmentTagList()Lnet/minecraft/nbt/NBTTagList;",
-            shift = At.Shift.AFTER),
-        cancellable = true)
-    private void reEnchant(CallbackInfo nameAndNumber, @Local(argsOnly = true)ICommandSender sender,
-                           @Local(argsOnly = true) String[] args, @Local ItemStack itemstack) {
-        if (args.length < 2) return;
-        if (Config.enchant_clear_enable && "-0".equalsIgnoreCase(args[1])) return;
-
-        }
+    @WrapOperation(method = "processCommand",
+        at= @At(value = "INVOKE",
+        target = "Lnet/minecraft/command/CommandEnchant;func_152373_a(Lnet/minecraft/command/ICommandSender;Lnet/minecraft/command/ICommand;Ljava/lang/String;[Ljava/lang/Object;)V")
+    )
+    private void improveMessage (ICommandSender iCommandSender, ICommand iCommand, String s, Object[] objects, Operation<Void> original,
+                                 @Local ItemStack itemstack, @Local Enchantment enchantment, @Local(ordinal = 1) int level) {
+        original.call(iCommandSender, iCommand, "commands.enchant.enchant.verbose", new Object[] {
+            iCommandSender.getCommandSenderName(),
+            StatCollector.translateToLocal(itemstack.getUnlocalizedName()),
+            enchantment.getTranslatedName(level)});
+        //Enchanting by %1$s of %2$s with %3$s succeeded
     }
-*/
-/*
-    @Inject(method = "processCommand(Lnet/minecraft/command/ICommandSender;[Ljava/lang/String;)V",
-    at = @At(value = "INVOKE", target = "Lnet/minecraft/player/EntityPlayer;getCurrentEquippedItem()Lnet/minecraft/item/ItemStack;"),
-        cancellable = true)
-    private void clearEnchant(CallbackInfo nameAndNumber, @Local(argsOnly = true)ICommandSender sender,
-                              @Local(argsOnly = true) String[] args) { //, @Local ItemStack itemstack) {
 
-    }
-*/
+
     @Inject(
         method = "addTabCompletionOptions(Lnet/minecraft/command/ICommandSender;[Ljava/lang/String;)Ljava/util/List;",
         at = @At("HEAD"), cancellable = true)
