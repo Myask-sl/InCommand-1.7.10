@@ -1,17 +1,21 @@
 package invalid.myask.incommand.mixins;
 
-import com.gtnewhorizon.gtnhmixins.IEarlyMixinLoader;
-import cpw.mods.fml.relauncher.IFMLLoadingPlugin;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-public class EarlyMixinPlugin implements IEarlyMixinLoader, IFMLLoadingPlugin {
+import com.gtnewhorizon.gtnhmixins.IEarlyMixinLoader;
+import cpw.mods.fml.relauncher.IFMLLoadingPlugin;
+
+import invalid.myask.incommand.Tags;
+
+//@IFMLLoadingPlugin.Name("InCommandEarlyMixinPlugin")
+//@IFMLLoadingPlugin.MCVersion("1.7.10")
+public class InCommandEarlyMixinPlugin implements IEarlyMixinLoader, IFMLLoadingPlugin {
     @Override
     public String getMixinConfig() {
-        return "";
+        return "mixins." + Tags.MODID + ".early.json";
     }
 
     @Override
@@ -28,12 +32,12 @@ public class EarlyMixinPlugin implements IEarlyMixinLoader, IFMLLoadingPlugin {
 
     @Override
     public String getModContainerClass() {
-        return "";
+        return null;
     }
 
     @Override
     public String getSetupClass() {
-        return "";
+        return null;
     }
 
     @Override
@@ -43,6 +47,6 @@ public class EarlyMixinPlugin implements IEarlyMixinLoader, IFMLLoadingPlugin {
 
     @Override
     public String getAccessTransformerClass() {
-        return "";
+        return null;
     }
 }
