@@ -78,7 +78,7 @@ public abstract class MixinCommandEnchant extends CommandBase {
         require = 1
     )
     private String improveMessage (String original) {
-        return "commands.enchant.success.verbose";
+        return Config.verbose_enchant ? "commands.enchant.success.verbose" : original;
     }
 
     @ModifyArg(method = "processCommand",
@@ -87,13 +87,14 @@ public abstract class MixinCommandEnchant extends CommandBase {
         require = 1,
         index = 3
     )
-    private Object[] improveMessage2 (Object[] objects, @Local(argsOnly = true) ICommandSender sender,
+    private Object[] improveMessage2 (Object[] original, @Local(argsOnly = true) ICommandSender sender,
     @Local(name="entityplayermp") EntityPlayerMP playerMP, @Local(name="enchantment") Enchantment enchantment, @Local(name="j", ordinal = 1) int level) {
-        return new Object[] {
+        return Config.verbose_enchant ? new Object[] {
             sender.getCommandSenderName(),
             playerMP.getCommandSenderName(),
             StatCollector.translateToLocal(playerMP.getCurrentEquippedItem().getDisplayName()),
-            enchantment.getTranslatedName(level)};
+            enchantment.getTranslatedName(level)}
+            : original;
         //Enchanting by %1$s of %3$s held by %2$s with %4$s succeeded
     }
 

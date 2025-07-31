@@ -17,6 +17,7 @@ public class Config {
 
     public static boolean loot_dump_empties = true;
     public static boolean enchant_clear_enable = true;
+    public static boolean verbose_enchant = true;
 
 
     public static void synchronizeConfiguration(File configFile) {
@@ -70,6 +71,9 @@ public class Config {
 
         enchant_clear_enable = configuration.getBoolean("enchant_clear_enable", "enchant",
             enchant_clear_enable, "/enchant clear to clear enchants enable");
+
+        verbose_enchant = configuration.getBoolean("verbose_enchant", "enchant",
+            verbose_enchant, "/enchant reports command sender, target, item, and enchantment on success.");
 
 
         if (configuration.hasChanged()) {
