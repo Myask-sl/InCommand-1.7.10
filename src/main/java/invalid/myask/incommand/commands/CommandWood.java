@@ -39,8 +39,8 @@ public class CommandWood extends InCommandBase {
             func_152373_a(
                 sender,
                 this,
-                "commands.wood.success",
+                "command.wood.success",
                 new Object[] { itS.func_151000_E(), 4, player.getCommandSenderName() }); //TODO: make params actually in template.
-        } else sender.addChatMessage(new ChatComponentTranslation("commands.wood.failure.hasty"));
+        } else sender.addChatMessage(new ChatComponentTranslation("command.wood.failure.hasty"));
     }
 }

@@ -14,17 +14,17 @@ commands.loot.failure.outside.world=That block's outside the world!
 commands.loot.success.nothing=/loot times 0 gives nothing, always. /loot command successful, if you want to call it that.
 commands.loot.success.nothing.mobloot.gameruled=Gamerule doMobLoot false means no loot. /loot command successful, if you want to call it that.
 commands.loot.success.nothing.mobloot.nonliving=/loot on non-living %s gives nothing. /loot command successful, if you want to call it that.
-command.loot.failure.insert.noninventory=Block at %.0f, %.0f, %.0f has no inventory!
+commands.loot.failure.insert.noninventory=Block at %.0f, %.0f, %.0f has no inventory!
 
-command.loot.success.fish=/loot successful, repeated %d times, of FISH in biome %s
-command.loot.success.kill=/loot successful, repeated %d times, of KILL of entity %s
-command.loot.success.loot=/loot successful, repeated %d times, of LOOT table named %s
-command.loot.success.mine=/loot successful, repeated %d times, of MINE of block %s
+commands.loot.success.fish=/loot successful, repeated %d times, of FISH in biome %s
+commands.loot.success.kill=/loot successful, repeated %d times, of KILL of entity %s
+commands.loot.success.loot=/loot successful, repeated %d times, of LOOT table named %s
+commands.loot.success.mine=/loot successful, repeated %d times, of MINE of block %s
 
-command.loot.success.give=and that /loot was given to player %s.
-command.loot.success.insert=and that /loot was put in the %s at [%.1f, %.1f, %.1f].
-command.loot.success.spawn=and that /loot was spawned at [%.1f, %.1f, %.1f].
-command.loot.success.dump=and that /loot was printed to the log.
+commands.loot.success.give=and that /loot was given to player %s.
+commands.loot.success.insert=and that /loot was put in the %s at [%.1f, %.1f, %.1f].
+commands.loot.success.spawn=and that /loot was spawned at [%.1f, %.1f, %.1f].
+commands.loot.success.dump=and that /loot was printed to the log.
 
 commands.wood.usage="/wood (no arguments)": drops four saplings. 10 minute (12000 tick) default cooldown.
 commands.wood.failure.hasty=/wood not cooled down yet!

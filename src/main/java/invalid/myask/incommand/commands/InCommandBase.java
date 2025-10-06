@@ -12,7 +12,7 @@ public abstract class InCommandBase extends CommandBase {
 
     @Override
     public String getCommandUsage(ICommandSender sender) {
-        return "command." + getCommandName() + ".usage";
+        return "commands." + getCommandName() + ".usage";
     }
 
     @Override

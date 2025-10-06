@@ -258,10 +258,10 @@ public class CommandLoot extends InCommandBase {
         }
 
         switch (targetType) {
-            case FISH -> func_152373_a(sender, this, "command.loot.success.fish", times, targetFishBiome);
-            case KILL -> func_152373_a(sender, this, "command.loot.success.kill", times, mobName);
-            case LOOT -> func_152373_a(sender, this, "command.loot.success.loot", times, lootTableName);
-            case MINE -> func_152373_a(sender, this, "command.loot.success.mine", times, ""); //TODO: blockName
+            case FISH -> func_152373_a(sender, this, "commands.loot.success.fish", times, targetFishBiome);
+            case KILL -> func_152373_a(sender, this, "commands.loot.success.kill", times, mobName);
+            case LOOT -> func_152373_a(sender, this, "commands.loot.success.loot", times, lootTableName);
+            case MINE -> func_152373_a(sender, this, "commands.loot.success.mine", times, ""); //TODO: blockName
         }
 
         IInventory destinationInventory = null;
@@ -269,7 +269,7 @@ public class CommandLoot extends InCommandBase {
             TileEntity te = world.getTileEntity(floor_double(destinationX), floor_double(destinationY), floor_double(destinationZ));
             if (te instanceof IInventory inv) destinationInventory = inv;
             else {
-                func_152373_a(sender, this, "command.loot.failure.insert.noninventory", floor_double(destinationX), floor_double(destinationY), floor_double(destinationZ));
+                func_152373_a(sender, this, "commands.loot.failure.insert.noninventory", floor_double(destinationX), floor_double(destinationY), floor_double(destinationZ));
                 return;
             }
         }
@@ -300,10 +300,10 @@ public class CommandLoot extends InCommandBase {
 
 
         switch(destination) {
-            case DUMP -> func_152373_a(sender, this, "command.loot.success.dump");
-            case GIVE -> func_152373_a(sender, this, "command.loot.success.give", destinationPlayer.getCommandSenderName(), destinationX, destinationY, destinationZ);
-            case REPLACEBLOCK -> func_152373_a(sender, this, "command.loot.success.insert", destinationInventory.getInventoryName(), destinationX, destinationY, destinationZ);
-            case SPAWN -> func_152373_a(sender, this, "command.loot.success.spawn", destinationX, destinationY, destinationZ);
+            case DUMP -> func_152373_a(sender, this, "commands.loot.success.dump");
+            case GIVE -> func_152373_a(sender, this, "commands.loot.success.give", destinationPlayer.getCommandSenderName(), destinationX, destinationY, destinationZ);
+            case REPLACEBLOCK -> func_152373_a(sender, this, "commands.loot.success.insert", destinationInventory.getInventoryName(), destinationX, destinationY, destinationZ);
+            case SPAWN -> func_152373_a(sender, this, "commands.loot.success.spawn", destinationX, destinationY, destinationZ);
         }
     }
 
