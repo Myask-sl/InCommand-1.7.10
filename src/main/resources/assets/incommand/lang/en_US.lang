@@ -7,7 +7,7 @@ commands.iron.failure.hasty=/iron not cooled down yet!
 commands.iron.success=Gave four iron.
 
 commands.loot.usage="/loot [times N] [destination] (target)": puts the loot from Target into Destination. \nTimes sets how many times, default 1. Destination can be "give [player]" (default: give to you), "insert (container coordinates)", "spawn (coordinates)", or "dump" which only prints the items to log.\nTarget can be "fish [coordinates or biome, default 'here'] [tool]" loot (loottable)", "kill (entity) [tool]", "mine [coordinates] [tool]".\nTool defaults to "mainhand".\nNot yet implemented: mine; tool.
-commands.loot.failure.arguments.few=/loot arguments incomplete.
+commands.loot.failure.args.few=/loot arguments incomplete.
 commands.loot.failure.args.target=/loot target keyword must be one of fish, loot, kill, mine.
 commands.loot.failure.args.loottable=Loottable "%s" does not exist.
 commands.loot.failure.outside.world=That block's outside the world!

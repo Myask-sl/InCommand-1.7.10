@@ -57,7 +57,7 @@ public class CommandLoot extends InCommandBase {
     }
 
     private void throwIfArgsTooShort (int parseIndex, String[] args) {
-        if (parseIndex >= args.length) throw new CommandException("commands.loot.failure.arguments.few");
+        if (parseIndex >= args.length) throw new CommandException("commands.loot.failure.args.few");
     }
     private boolean notValidTargetString(String targetCandidate) {
         return !"fish".equalsIgnoreCase(targetCandidate) &&
