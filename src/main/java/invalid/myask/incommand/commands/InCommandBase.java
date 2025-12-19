@@ -2,6 +2,13 @@ package invalid.myask.incommand.commands;
 
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.ICommandSender;
+import net.minecraft.command.PlayerSelector;
+import net.minecraft.command.SyntaxErrorException;
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.util.Vec3;
+
+import java.util.regex.Pattern;
 
 public abstract class InCommandBase extends CommandBase {
     private final int permissionLevel;
