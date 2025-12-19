@@ -1,3 +1,5 @@
+commands.coords.caret.mixed=Cannot mix local and other coordinate spaces.
+
 commands.enchant.clear.success=Full enchantment removal for held item succeeded
 commands.enchant.zero.success=Single enchantment removal for held item succeeded
 commands.enchant.success.verbose=Enchanting by %1$s of %3$s held by %2$s with %4$s succeeded
