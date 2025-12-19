@@ -32,7 +32,7 @@ import java.util.List;
 import static net.minecraft.util.MathHelper.floor_double;
 
 public class CommandLoot extends InCommandBase {
-    public static CommandLoot instance = new CommandLoot(Config.loot_permission_level);
+    public static final CommandLoot instance = new CommandLoot(Config.loot_permission_level);
     private static final ArrayList<String> leadKeywords = new ArrayList<String>(Arrays.asList("times", "give", "replaceBlock", "spawn"));
 
     public enum Destination {

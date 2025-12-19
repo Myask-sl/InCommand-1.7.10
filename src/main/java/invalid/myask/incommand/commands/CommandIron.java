@@ -15,7 +15,7 @@ import invalid.myask.incommand.Config;
 
 public class CommandIron extends InCommandBase {
 
-    public static CommandIron instance = new CommandIron(Config.iron_permission_level);
+    public static final CommandIron instance = new CommandIron(Config.iron_permission_level);
     private Map<UUID, Long> lastInvoke = new HashMap<>();
 
     protected CommandIron(int permissionLevel) {

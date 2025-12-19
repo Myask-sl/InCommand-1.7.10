@@ -15,7 +15,7 @@ import invalid.myask.incommand.Config;
 
 public class CommandWood extends InCommandBase {
 
-    public static CommandWood instance = new CommandWood(Config.wood_permission_level);
+    public static final CommandWood instance = new CommandWood(Config.wood_permission_level);
     private Map<UUID, Long> lastInvoke = new HashMap<>();
 
     protected CommandWood(int permissionLevel) {
