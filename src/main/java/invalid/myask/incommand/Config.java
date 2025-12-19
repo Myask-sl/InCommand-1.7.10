@@ -23,51 +23,35 @@ public class Config {
     public static void synchronizeConfiguration(File configFile) {
         Configuration configuration = new Configuration(configFile);
 //Command Enables
-        ancient_commands_enable = configuration.getBoolean(
-            "ancient_commands_enable",
-            "enable",
-            ancient_commands_enable,
-            "Enable really old commands (/iron, /wood, /solid)");
-        loot_enable = configuration.getBoolean("loot_enable", Configuration.CATEGORY_GENERAL,
+        ancient_commands_enable = configuration.getBoolean("ancient_commands_enable","enable",
+            ancient_commands_enable,"Enable really old commands (/iron, /wood, /solid)");
+        loot_enable = configuration.getBoolean("loot_enable", "enable",
             loot_enable, "enable /loot command");
 //Permission levels
-        iron_permission_level = configuration.getInt(
-            "iron_permission_level",
-            "enable",
-            iron_permission_level,
-            0,
-            5,
-            "Permission level for /iron [drop four saplings] (5 prevents use)"
-        );
-        wood_permission_level = configuration.getInt(
-            "iron_permission_level",
-            "permissions",
-            iron_permission_level,
-            0,
-            5,
-            "Permission level for /wood [drop four saplings] (5 prevents use)"
-        );
-        loot_permission_level = configuration.getInt(
-            "loot_permission_level",
-            "permissions",
-            loot_permission_level,
-            0,
-            5,
-            "Permission level for /loot (5 prevents use)"
-        );
+        iron_permission_level = configuration.getInt("iron_permission_level","permissions",
+            iron_permission_level,0,5,
+            "Permission level for /iron [drop four saplings] (5 prevents use)");
+        wood_permission_level = configuration.getInt("wood_permission_level","permissions",
+            wood_permission_level,0,5,
+            "Permission level for /wood [drop four saplings] (5 prevents use)");
 
-        //command options
-        ancient_drops_delay = configuration.getInt(
-            "ancient_drops_delay",
-            "ancient",
-            ancient_drops_delay,
-            0,
-            Integer.MAX_VALUE,
+        loot_permission_level = configuration.getInt("loot_permission_level","permissions",
+            loot_permission_level,0,5,"Permission level for /loot (5 prevents use)");
+        rotate_permission_level = configuration.getInt("rotate_permission_level","permissions",
+            rotate_permission_level,0,5,"Permission level for /rotate (5 prevents use)");
+
+        killother_permission_level = configuration.getInt("killother_permission_level","permissions",
+            killother_permission_level,0,5,"Permission level for /killother (5 prevents use)");;
+        rotateself_permission_level = configuration.getInt("rotateself_permission_level","permissions",
+            rotateself_permission_level,0,5,"Permission level for /rotateself (5 prevents use)");;
+
+//command options
+        ancient_drops_delay = configuration.getInt("ancient_drops_delay","ancient",ancient_drops_delay,
+            0,Integer.MAX_VALUE,
             "Minimum delay between /iron, /wood uses (in ticks, default 12000 = 10 minutes)");
 
         loot_dump_empties = configuration.getBoolean("loot_dump_empties", "loot",
             loot_dump_empties, "/loot destination:dump logs empty itemstacks");
-
 
         enchant_clear_enable = configuration.getBoolean("enchant_clear_enable", "enchant",
             enchant_clear_enable, "/enchant clear to clear enchants enable");
