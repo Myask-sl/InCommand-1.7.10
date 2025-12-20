@@ -8,6 +8,12 @@ commands.iron.usage="/iron (no arguments)": drops four iron ingots. 10 minute (1
 commands.iron.failure.hasty=/iron not cooled down yet!
 commands.iron.success=Gave four iron.
 
+commands.killother.usage="/killother [targets]": \nTargets can be any player or entity selectors, in any number.
+commands.killother.failure.args.few=/killother arguments incomplete. 
+commands.killother.success=%s /killothered %s
+
+death.attack.command_killother=%1$s was /killothered
+
 commands.loot.usage="/loot [times N] [destination] (target)": puts the loot from Target into Destination. \nTimes sets how many times, default 1. Destination can be "give [player]" (default: give to you), "insert (container coordinates)", "spawn (coordinates)", or "dump" which only prints the items to log.\nTarget can be "fish [coordinates or biome, default 'here'] [tool]" loot (loottable)", "kill (entity) [tool]", "mine [coordinates] [tool]".\nTool defaults to "mainhand".\nNot yet implemented: mine; tool.
 commands.loot.failure.args.few=/loot arguments incomplete.
 commands.loot.failure.args.target=/loot target keyword must be one of fish, loot, kill, mine.
@@ -27,6 +33,15 @@ commands.loot.success.give=and that /loot was given to player %s.
 commands.loot.success.insert=and that /loot was put in the %s at [%.1f, %.1f, %.1f].
 commands.loot.success.spawn=and that /loot was spawned at [%.1f, %.1f, %.1f].
 commands.loot.success.dump=and that /loot was printed to the log.
+
+commands.rotate.usage="/rotate [subject] [angle]": \nSubject can be a player or target selector for entities or players. Angle can be "yaw pitch" or "facing x y z" or "facing entity (selector)".  
+commands.rotate.failure.args.few=/rotate arguments incomplete. 
+commands.rotate.failure.args.nosubject=/rotate argument did not specify exactly one entity to rotate.
+commands.rotate.failure.args.facing.entity=You have to specify an entity to face after "facing entity"!
+commands.rotate.failure.facing.tooclose=Facing target too close!
+commands.rotate.success.facing.coordinates=/rotated %s to face (%f, %f, %f)
+commands.rotate.success.facing.entity=/rotated %s to face %s.
+commands.rotate.success.angles=/rotated %s to yaw %f, pitch %f.
 
 commands.wood.usage="/wood (no arguments)": drops four saplings. 10 minute (12000 tick) default cooldown.
 commands.wood.failure.hasty=/wood not cooled down yet!

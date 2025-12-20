@@ -4,8 +4,12 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
+import invalid.myask.incommand.commands.CommandDie;
 import invalid.myask.incommand.commands.CommandIron;
+import invalid.myask.incommand.commands.CommandKillOther;
 import invalid.myask.incommand.commands.CommandLoot;
+import invalid.myask.incommand.commands.CommandRotate;
+import invalid.myask.incommand.commands.CommandRotateSelf;
 import invalid.myask.incommand.commands.CommandWood;
 
 public class CommonProxy {
@@ -32,5 +36,13 @@ public class CommonProxy {
         }
         if (Config.loot_enable)
             event.registerServerCommand(CommandLoot.instance);
+        if (Config.rotate_enable) {
+            event.registerServerCommand(CommandRotate.instance);
+            event.registerServerCommand(CommandRotateSelf.instance);
+        }
+        if (Config.killself_aliases)
+            event.registerServerCommand(CommandDie.instance);
+        if (Config.killother_enable)
+            event.registerServerCommand(CommandKillOther.instance);
     }
 }
