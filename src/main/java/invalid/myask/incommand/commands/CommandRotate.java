@@ -72,6 +72,8 @@ public class CommandRotate extends InCommandBase {
                     targetPos.yCoord + subject.posY,
                     targetPos.zCoord + subject.posZ);
 
+            if (subject instanceof EntityPlayerMP alex) InCommand.networkWrapper.sendTo(new RotatePlayerMessage(alex.rotationYaw, alex.rotationPitch), alex);
+
         } else { //raw rotations
             subject.rotationYaw = (float) parseTildeRotation(sender, subject.rotationYaw, args[1]);
             subject.rotationPitch = (float) parseTildeRotation(sender, subject.rotationPitch, args[2]);
