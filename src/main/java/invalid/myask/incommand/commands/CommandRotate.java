@@ -1,6 +1,8 @@
 package invalid.myask.incommand.commands;
 
 import invalid.myask.incommand.Config;
+import invalid.myask.incommand.InCommand;
+import invalid.myask.incommand.network.RotatePlayerMessage;
 import net.minecraft.command.CommandException;
 import net.minecraft.command.ICommandSender;
 import net.minecraft.entity.Entity;
@@ -73,6 +75,7 @@ public class CommandRotate extends InCommandBase {
         } else { //raw rotations
             subject.rotationYaw = (float) parseTildeRotation(sender, subject.rotationYaw, args[1]);
             subject.rotationPitch = (float) parseTildeRotation(sender, subject.rotationPitch, args[2]);
+            if (subject instanceof EntityPlayerMP alex) InCommand.networkWrapper.sendTo(new RotatePlayerMessage(alex.rotationYaw, alex.rotationPitch), alex);
             func_152373_a(sender, this,"commands.rotate.success.angles", subject.getCommandSenderName(), args[1], args[2]);
         }
     }

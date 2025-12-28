@@ -17,8 +17,11 @@ public class CommandKillOther extends InCommandBase {
     public static final CommandKillOther instance = new CommandKillOther(Config.killother_permission_level);
 
     protected static final List<String> alias = new ArrayList<>(1);
+    public static final DamageSource KILLOTHER = new DamageSource("command_killother");
+
     static {
         if (Config.killother_alias_kill) alias.add("kill");
+        KILLOTHER.setDamageBypassesArmor().setDamageIsAbsolute();
     }
 
     protected CommandKillOther(int killotherPermissionLevel) {
@@ -45,7 +48,7 @@ public class CommandKillOther extends InCommandBase {
         }
         for (Entity e: matchedEntities) {
             if (e instanceof EntityLivingBase elb)
-                elb.attackEntityFrom(new DamageSource("command_killother"), Float.MAX_VALUE);
+                elb.attackEntityFrom(KILLOTHER, Float.MAX_VALUE);
             else e.setDead();
         }
         func_152373_a(sender, instance, "commands.killother.success", sender.getCommandSenderName(), matchedEntities);

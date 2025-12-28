@@ -1,5 +1,6 @@
 package invalid.myask.incommand;
 
+import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -23,6 +24,8 @@ public class InCommand {
 
     @SidedProxy(clientSide = Tags.MODGROUP + ".ClientProxy", serverSide = Tags.MODGROUP + ".CommonProxy")
     public static CommonProxy proxy;
+
+    public static SimpleNetworkWrapper networkWrapper;
 
     @Mod.EventHandler
     // preInit "Run before anything else. Read your config, create blocks, items, etc, and register them with the

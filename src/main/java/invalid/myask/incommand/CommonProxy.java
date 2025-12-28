@@ -4,6 +4,8 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
+import cpw.mods.fml.common.network.NetworkRegistry;
+import cpw.mods.fml.relauncher.Side;
 import invalid.myask.incommand.commands.CommandDie;
 import invalid.myask.incommand.commands.CommandIron;
 import invalid.myask.incommand.commands.CommandKillOther;
@@ -11,6 +13,8 @@ import invalid.myask.incommand.commands.CommandLoot;
 import invalid.myask.incommand.commands.CommandRotate;
 import invalid.myask.incommand.commands.CommandRotateSelf;
 import invalid.myask.incommand.commands.CommandWood;
+import invalid.myask.incommand.network.RotatePlayerMessage;
+import invalid.myask.incommand.network.RotatePlayerMessageHandler;
 
 public class CommonProxy {
 
@@ -19,6 +23,8 @@ public class CommonProxy {
     public void preInit(FMLPreInitializationEvent event) {
         Config.synchronizeConfiguration(event.getSuggestedConfigurationFile());
 
+        InCommand.networkWrapper = NetworkRegistry.INSTANCE.newSimpleChannel(InCommand.MODID);
+        InCommand.networkWrapper.registerMessage(RotatePlayerMessageHandler.class, RotatePlayerMessage.class, 0, Side.CLIENT);
     }
 
     // load "Do your mod setup. Build whatever data structures you care about. Register recipes." (Remove if not needed)
