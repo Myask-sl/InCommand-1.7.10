@@ -9,3 +9,9 @@ Uses Unimixins.
 Two little give commands from alpha (``/iron`` and ``/wood``).
 
 ``/loot``, with a ``dump`` option for output that just sends resulting itemstacks to the logger, and a leading ``times`` option to repeat itself N times (though it still doesn't know how to stack items, so insert with more times isn't gonna be very useful. (have not implemented ``/loot mine``, or tool checking, but all the other vanilla options are in.)
+
+``/killother``, with optional override for ``/kill`` among other aliasing options.
+
+``/rotate`` for your entity-rotating needs (supports caret-coordinate and rotation-tilde syntax!)
+
+Limited support for ``@s`` selector in e.g. enchant/effect, new commands.
