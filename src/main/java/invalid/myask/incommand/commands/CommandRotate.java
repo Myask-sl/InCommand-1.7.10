@@ -58,11 +58,11 @@ public class CommandRotate extends InCommandBase {
             targetPos.zCoord -= subject.posZ;
             if (targetPos.squareDistanceTo(0,0,0) < Config.rotate_facing_min_dist_square)
                 throw new CommandException("commands.rotate.failure.facing.tooclose");
-            subject.rotationYaw = (float)(Math.atan2(targetPos.xCoord, targetPos.yCoord) * 180.0D / Math.PI);
+            subject.rotationYaw = (float)-(Math.atan2(targetPos.xCoord, targetPos.zCoord) * 180.0D / Math.PI);
 
             double dist2d = targetPos.xCoord * targetPos.xCoord + targetPos.zCoord * targetPos.zCoord;
             dist2d = Math.sqrt(dist2d);
-            subject.rotationPitch = (float)(Math.atan2(targetPos.yCoord, dist2d) * 180.0D / Math.PI);
+            subject.rotationPitch = (float)-(Math.atan2(targetPos.yCoord, dist2d) * 180.0D / Math.PI);
             while (subject.rotationPitch - subject.prevRotationPitch < -180.0F)
                 subject.prevRotationPitch -= 360.0F;
 
