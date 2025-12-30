@@ -14,7 +14,7 @@ import net.minecraft.world.World;
 import invalid.myask.incommand.potion.HiddenPotionEffect;
 
 @Mixin(value = EntityLivingBase.class, priority = 1002)
-public class MixinEntityLivingBase_hideParticles {
+public class MixinEntityLivingBase_hideParticles { //FIXME
     @Shadow
     private final HashMap activePotionsMap = new HashMap();
 
