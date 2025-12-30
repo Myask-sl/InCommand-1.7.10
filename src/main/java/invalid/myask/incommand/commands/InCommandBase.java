@@ -66,13 +66,18 @@ public abstract class InCommandBase extends CommandBase {
         up = steve.getLookVec().normalize();
         steve.rotationPitch = oldPitch; steve.rotationYaw = oldYaw;
         forth = steve.getLookVec().normalize();
-        double sway = parseDouble(sender, args[firstIndex].substring( 1)),
-            heave = parseDouble(sender, args[firstIndex + 1].substring( 1)),
-            surge = parseDouble(sender, args[firstIndex + 2].substring( 1));
+        double sway = parseDoubleOrZero(sender, args[firstIndex].substring( 1)),
+            heave = parseDoubleOrZero(sender, args[firstIndex + 1].substring( 1)),
+            surge = parseDoubleOrZero(sender, args[firstIndex + 2].substring( 1));
         result.xCoord += sway * left.xCoord + heave * up.xCoord + surge * forth.xCoord;
         result.yCoord += sway * left.yCoord + heave * up.yCoord + surge * forth.yCoord;
         result.zCoord += sway * left.zCoord + heave * up.zCoord + surge * forth.zCoord;
         return result;
+    }
+
+    public double parseDoubleOrZero(ICommandSender sender, String substring) {
+        if (!substring.isEmpty()) return parseDouble(sender, substring);
+        return 0;
     }
 
     public Vec3 parseCoordinatesCaretOrTilde(ICommandSender sender, String[] args, int firstIndex) {

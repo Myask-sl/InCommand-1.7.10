@@ -8,6 +8,7 @@ import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.relauncher.Side;
 
 import invalid.myask.incommand.commands.CommandClone;
+import invalid.myask.incommand.commands.CommandCoordTest;
 import invalid.myask.incommand.commands.CommandDie;
 import invalid.myask.incommand.commands.CommandFill;
 import invalid.myask.incommand.commands.CommandIron;
@@ -41,6 +42,7 @@ public class CommonProxy {
     public void serverStarting(FMLServerStartingEvent event) {
         IDDictionary.refreshAllDicts();
         GameRules rules = event.getServer().getEntityWorld().getWorldInfo().getGameRulesInstance();
+
         if (Config.ancient_commands_enable) {
             event.registerServerCommand(CommandIron.instance);
             event.registerServerCommand(CommandWood.instance);
@@ -61,5 +63,7 @@ public class CommonProxy {
             rules.addGameRule("max_block_modifications", "32768");
             rules.addGameRule("max_block_meta", "15");
         }
+
+        event.registerServerCommand(CommandCoordTest.instance);
     }
 }

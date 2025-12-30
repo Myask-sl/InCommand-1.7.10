@@ -3,7 +3,6 @@ package invalid.myask.incommand;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.common.MinecraftForge;
 
-import invalid.myask.incommand.commands.CommandCoordTest;
 import invalid.myask.incommand.commands.fake.CommandFakeEffect;
 import invalid.myask.incommand.commands.fake.CommandFakeEnchant;
 
@@ -16,8 +15,6 @@ public class ClientProxy extends CommonProxy {
     @Override
     public void preInit(FMLPreInitializationEvent event) {
         super.preInit(event);
-
-        net.minecraftforge.client.ClientCommandHandler.instance.registerCommand(CommandCoordTest.instance);
 
         net.minecraftforge.client.ClientCommandHandler.instance.registerCommand(CommandFakeEnchant.instance);
         net.minecraftforge.client.ClientCommandHandler.instance.registerCommand(CommandFakeEffect.instance);
