@@ -5,6 +5,7 @@ import net.minecraft.command.ICommandSender;
 import net.minecraft.command.PlayerSelector;
 import net.minecraft.command.SyntaxErrorException;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.util.Vec3;
 
@@ -55,7 +56,7 @@ public abstract class InCommandBase extends CommandBase {
 
     //todo: worldbound, mixin CommandBase's impl?
     public Vec3 parseCaretNotation(ICommandSender sender, String[] args, int firstIndex) {
-        EntityPlayerMP steve = getCommandSenderAsPlayer(sender);
+        EntityLivingBase steve = (EntityLivingBase) getCommandSenderAsEntity(sender);
         Vec3 result = Vec3.createVectorHelper(steve.posX, steve.posY, steve.posZ),
              up, left, forth;
         float oldPitch = steve.rotationPitch, oldYaw = steve.rotationYaw;

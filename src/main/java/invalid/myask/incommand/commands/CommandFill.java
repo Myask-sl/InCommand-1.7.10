@@ -15,6 +15,8 @@ import net.minecraftforge.oredict.OreDictionary;
 import java.util.ArrayList;
 import java.util.List;
 
+import static net.minecraft.realms.RealmsMth.floor;
+
 public class CommandFill extends InCommandBase {
     public static final CommandFill instance = new CommandFill(Config.fill_permission_level);
     public static final List<String> FILLMODESTRS = new ArrayList<>(6);
@@ -77,12 +79,12 @@ public class CommandFill extends InCommandBase {
         ComMode fillMode = ComMode.REPLACEANY;
         boolean replaceFiltered = false;
 
-        if (from.xCoord < to.xCoord) { x0 = (int) from.xCoord; x1 = (int) to.xCoord; }
-        else                         { x0 = (int) to.xCoord; x1 = (int) from.xCoord; }
-        if (from.yCoord < to.yCoord) { y0 = (int) from.yCoord; y1 = (int) to.yCoord; }
-        else                         { y0 = (int) to.yCoord; y1 = (int) from.yCoord; }
-        if (from.zCoord < to.zCoord) { z0 = (int) from.zCoord; z1 = (int) to.zCoord; }
-        else                         { z0 = (int) to.zCoord; z1 = (int) from.zCoord; }
+        if (from.xCoord < to.xCoord) { x0 = floor(from.xCoord); x1 = floor(to.xCoord); }
+        else                         { x0 = floor(to.xCoord); x1 = floor(from.xCoord); }
+        if (from.yCoord < to.yCoord) { y0 = floor(from.yCoord); y1 = floor(to.yCoord); }
+        else                         { y0 = floor(to.yCoord); y1 = floor(from.yCoord); }
+        if (from.zCoord < to.zCoord) { z0 = floor(from.zCoord); z1 = floor(to.zCoord); }
+        else                         { z0 = floor(to.zCoord); z1 = floor(from.zCoord); }
 
         int volume = (x1 - x0 + 1) * (y1 - y0 + 1) * (z1 - z0 + 1);
         if (volume > maxChanges) throw new CommandException("commands.fill.failure.toomany", volume, maxChanges);
@@ -96,28 +98,28 @@ public class CommandFill extends InCommandBase {
             } else argAdjust++;
         }
         if (args.length > 8 - argAdjust) {
-            if (FILLMODESTRS.contains(args[parsedArg - argAdjust])) {
+            if (FILLMODESTRS.contains(args[parsedArg])) {
                 for (ComMode c : ComMode.values()) {
-                    if (c.name.equalsIgnoreCase(args[parsedArg - argAdjust])) {
+                    if (c.name.equalsIgnoreCase(args[parsedArg])) {
                         parsedArg++;
                         if (c != ComMode.REPLACE || args.length > 9 - argAdjust)
                             if (c != ComMode.REPLACE) fillMode = c;
                         break;
                     }
                 }
-                if (fillMode == ComMode.REPLACEANY) throw new CommandException("commands.fill.failure.fillmode");
-            } else throw new CommandException("commands.fill.failure.fillmode");
+                if (fillMode == ComMode.REPLACEANY) throw new CommandException("commands.fill.failure.args.fillmode");
+            } else throw new CommandException("commands.fill.failure.args.fillmode");
         }
 
         if (args.length > 9 - argAdjust) {
             //if (fillMode != ComMode.REPLACE) throw new CommandException("commands.fill.failure.args.paststrat");
-            filterBlock = getBlockByText(sender, args[parsedArg++ - argAdjust]);
+            filterBlock = getBlockByText(sender, args[parsedArg++]);
             replaceFiltered = true;
-            if (args.length > parsedArg - argAdjust) {
-                if (args[parsedArg - argAdjust].matches(META_REGEX)) {
-                    if ("*".equals(args[parsedArg - argAdjust])) ;//filterMeta = OreDictionary.WILDCARD_VALUE; //for clarity
+            if (args.length > 10 - argAdjust) {
+                if (args[parsedArg].matches(META_REGEX)) {
+                    if ("*".equals(args[parsedArg])) ;//filterMeta = OreDictionary.WILDCARD_VALUE; //for clarity
                     else {
-                        filterMeta = parseInt(sender, args[parsedArg - argAdjust]);
+                        filterMeta = parseInt(sender, args[parsedArg]);
                         if (filterMeta > maxMeta) throw new CommandException("commands.fill.failure.meta.oob");
                         else if (filterMeta < 0) throw new  CommandException("commands.fill.failure.meta.negative");
                     }
@@ -125,9 +127,9 @@ public class CommandFill extends InCommandBase {
                 } else argAdjust++;
             }
             if (args.length > parsedArg - argAdjust) {
-                if (REPLACEMODESTRS.contains(args[parsedArg - argAdjust])) {
+                if (REPLACEMODESTRS.contains(args[parsedArg])) {
                     for (ComMode c : ComMode.values()) {
-                        if (c.name.equalsIgnoreCase(args[parsedArg - argAdjust])) {
+                        if (c.name.equalsIgnoreCase(args[parsedArg])) {
                             parsedArg++;
                             fillMode = c;
                             break;
@@ -163,7 +165,8 @@ public class CommandFill extends InCommandBase {
                     }
                     else if (fillMode == ComMode.DESTROY) {
                         String harvestTool = b.getHarvestTool(bMeta);
-                        if (b.getHarvestLevel(bMeta) == -1 || harvestTool == null || harvestTool.equalsIgnoreCase("shovel") ||
+                        if (b.getMaterial().isToolNotRequired() || b.getHarvestLevel(bMeta) == -1 || harvestTool == null
+                            || harvestTool.equalsIgnoreCase("shovel") ||
                             harvestTool.equalsIgnoreCase("pickaxe"))
                             b.dropBlockAsItem(w, x, y, z, bMeta, 0);
                     }
