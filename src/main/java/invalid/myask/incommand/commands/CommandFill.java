@@ -126,7 +126,7 @@ public class CommandFill extends InCommandBase {
                     parsedArg++;
                 } else argAdjust++;
             }
-            if (args.length > parsedArg - argAdjust) {
+            if (args.length > 11 - argAdjust) {
                 if (REPLACEMODESTRS.contains(args[parsedArg])) {
                     for (ComMode c : ComMode.values()) {
                         if (c.name.equalsIgnoreCase(args[parsedArg])) {
@@ -186,7 +186,7 @@ public class CommandFill extends InCommandBase {
     @Override
     public List<String> addTabCompletionOptions(ICommandSender sender, String[] args) {
         List<String> result = new ArrayList<>(3);
-        int i = args.length, argAdjust = 0; //xyzxyzBrBMS
+        int i = args.length, argAdjust = 1; //xyzxyzBrBMS //argadjust for omitting metas, also off-by-one in my case
         if (i > 7 && args[7].matches("\\d")) argAdjust++;
         if (i > 9 + argAdjust && args[9 + argAdjust].matches(META_REGEX)) argAdjust++; //allow metas being optional
         switch(i - argAdjust) {
