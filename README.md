@@ -20,7 +20,7 @@ Two little give commands from alpha (``/iron`` and ``/wood``). As originally imp
 
 ``/rotate`` for your entity-rotating needs (supports caret-coordinate and rotation-tilde syntax!), ``/rotateself`` for if you want people to be able to rotate self at lower permission.
 
-``/fill`` for mass-block-setting needs from 1.8, including the 1.21.5 enhancements to replace mode. ``max_block_modifications`` gamerule added accordingly; and also ``max_block_meta`` gamerule for altering top end when a meta-ID-extender is in place.
+``/fill`` for mass-block-setting needs from 1.8, including the 1.21.5 enhancements to replace mode. ``max_block_modifications`` gamerule added accordingly; and also ``max_block_meta`` gamerule for altering top end when a meta-ID-extender is in place. NBT writing/tag filtering Not Yet Impl.
 
 ~~``/clone``
 
