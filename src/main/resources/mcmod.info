@@ -3,7 +3,7 @@
 	"modList": [{
 		"modid": "${modId}",
 		"name": "${modName}",
-		"description": "InCommand does several small tweaks to commands, like letting you use /enchant and /effect\nwith words instead, /enchant clear to remove all enchants from an item, and changing the level of an\nexisting enchantment on an item (including to 0), and allowing Roman numerals for the enchant level.",
+		"description": "InCommand does several small tweaks to commands, like letting you use /enchant and /effect\nwith words instead, /enchant clear to remove all enchants from an item, and changing the level of an\nexisting enchantment on an item (including to 0), and allowing Roman numerals for the enchant level. Adds test command /coordtest. Also includes forward/backports of /iron, /wood, /fill, /killother, /rotate, and (soon) /clone",
 		"version": "${modVersion}",
 		"mcversion": "${minecraftVersion}",
 		"url": "",

@@ -9,8 +9,10 @@ public class Config {
     public static boolean ancient_commands_enable = false;
     public static boolean loot_enable = true;
     public static boolean rotate_enable = true;
-    public static boolean killself_aliases = true;
     public static boolean killother_enable = true;
+    public static boolean fill_clone_enable = true;
+
+    public static boolean killself_aliases = true;
     public static boolean killother_alias_kill = false;
 
     public static int iron_permission_level = 2;
@@ -21,6 +23,12 @@ public class Config {
 
     public static int killother_permission_level = 2;
     public static int rotateself_permission_level = 0;
+    public static int die_permission_level = 0;
+
+    public static int clone_permission_level = 2;
+    public static int fill_permission_level = 2;
+
+    public static int coordtest_permission_level = 0;
 
     public static int ancient_drops_delay = 12000;
 
@@ -42,6 +50,8 @@ public class Config {
             rotate_enable, "enable /rotate command");
         killother_enable = configuration.getBoolean("killother_enable", "enable",
             killother_enable, "enable /killother command");
+        fill_clone_enable = configuration.getBoolean("fill_clone_enable", "enable",
+            fill_clone_enable, "enable /fill and /clone commands");
 //Aliases
         killself_aliases = configuration.getBoolean("killself_aliases", "alias",
             killself_aliases, "Add aliases /die and /killself to vanilla /kill");
@@ -65,6 +75,16 @@ public class Config {
             killother_permission_level,0,5,"Permission level for /killother (5 prevents use)");
         rotateself_permission_level = configuration.getInt("rotateself_permission_level","permissions",
             rotateself_permission_level,0,5,"Permission level for /rotateself (5 prevents use)");
+        die_permission_level = configuration.getInt("die_permission_level","permissions",
+            die_permission_level,0,5,"Permission level for /die, /killself (5 prevents use). Note that this will not override vanilla /kill permission level.");
+
+        clone_permission_level = configuration.getInt("clone_permission_level","permissions",
+            clone_permission_level,0,5,"Permission level for /clone (5 prevents use)");
+        fill_permission_level = configuration.getInt("fill_permission_level","permissions",
+            fill_permission_level,0,5,"Permission level for /fill (5 prevents use)");
+
+        coordtest_permission_level = configuration.getInt("coordtest_permission_level","permissions",
+            coordtest_permission_level,0,5,"Permission level for /coordtest (5 prevents use)");
 
 //command options
         ancient_drops_delay = configuration.getInt("ancient_drops_delay","ancient",ancient_drops_delay,

@@ -1,5 +1,6 @@
 package invalid.myask.incommand.commands;
 
+import invalid.myask.incommand.Config;
 import net.minecraft.command.CommandKill;
 
 import java.util.ArrayList;
@@ -22,5 +23,10 @@ public class CommandDie extends CommandKill {
     @Override
     public List<String> getCommandAliases() {
         return alias;
+    }
+
+    @Override
+    public int getRequiredPermissionLevel() {
+        return Config.die_permission_level;
     }
 }
