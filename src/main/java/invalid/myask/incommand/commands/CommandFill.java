@@ -102,8 +102,8 @@ public class CommandFill extends InCommandBase {
                 for (ComMode c : ComMode.values()) {
                     if (c.name.equalsIgnoreCase(args[parsedArg])) {
                         parsedArg++;
-                        if (c != ComMode.REPLACE || args.length > 9 - argAdjust)
-                            if (c != ComMode.REPLACE) fillMode = c;
+                        // if (c != ComMode.REPLACE || args.length > 9 - argAdjust)
+                             fillMode = c;
                         break;
                     }
                 }
