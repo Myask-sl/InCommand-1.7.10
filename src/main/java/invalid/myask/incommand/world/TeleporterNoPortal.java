@@ -17,7 +17,7 @@ public class TeleporterNoPortal extends Teleporter {
     public static Teleporter to(int id) {
         return switch (id) {
             case 0 -> toLand();
-            case 1 -> toHell();
+            case -1 -> toHell();
             default -> null;
         };
     }
@@ -48,7 +48,7 @@ public class TeleporterNoPortal extends Teleporter {
 
     @Override
     public boolean placeInExistingPortal(Entity entity, double x, double y, double z, float yaw) {
-        entity.setLocationAndAngles(x, y, z, yaw, 0);
+        entity.setLocationAndAngles(entity.posX, y, entity.posZ, yaw, 0);
         entity.motionZ = entity.motionY = entity.motionX = 0;
         return true;
     }

@@ -24,6 +24,6 @@ Two little give commands from alpha (``/iron`` and ``/wood``). As originally imp
 
 ~~``/clone``~~
 
-``/warp`` for dimension change from April Fools' Day, but with a target. (*Caveat emptor*, a bit buggy.)
+``/warp`` for dimension change from April Fools' Day, but with a target.
 
 Limited support for ``@s`` selector in e.g. enchant/effect, new commands.
