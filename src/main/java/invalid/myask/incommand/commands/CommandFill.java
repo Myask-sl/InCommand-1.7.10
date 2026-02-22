@@ -22,6 +22,8 @@ public class CommandFill extends InCommandBase {
     public static final List<String> FILLMODESTRS = new ArrayList<>(6);
     public static final List<String> REPLACEMODESTRS = new ArrayList<>(4);
     public static final String META_REGEX = "\\d+|\\*";
+    public static final String NBT_REGEX = "\\{(\\w+:\\w+)(?:,(\\w+:\\w+))*}";
+
     public static final ItemStack DIAMOND_SHOVEL = new ItemStack(Items.diamond_shovel);
     public static final ItemStack DIAMOND_PICK = new ItemStack(Items.diamond_pickaxe);
 
@@ -96,8 +98,10 @@ public class CommandFill extends InCommandBase {
                 else if (resultMeta < 0) throw new  CommandException("commands.fill.failure.meta.negative");
                 parsedArg++;
             } else argAdjust++;
+            //TODO: parse NBT
+            argAdjust++;
         }
-        if (args.length > 8 - argAdjust) {
+        if (args.length > 9 - argAdjust) {
             if (FILLMODESTRS.contains(args[parsedArg])) {
                 for (ComMode c : ComMode.values()) {
                     if (c.name.equalsIgnoreCase(args[parsedArg])) {
@@ -111,11 +115,11 @@ public class CommandFill extends InCommandBase {
             } else throw new CommandException("commands.fill.failure.args.fillmode");
         }
 
-        if (args.length > 9 - argAdjust) {
+        if (args.length > 10 - argAdjust) {
             //if (fillMode != ComMode.REPLACE) throw new CommandException("commands.fill.failure.args.paststrat");
             filterBlock = getBlockByText(sender, args[parsedArg++]);
             replaceFiltered = true;
-            if (args.length > 10 - argAdjust) {
+            if (args.length > 11 - argAdjust) {
                 if (args[parsedArg].matches(META_REGEX)) {
                     if ("*".equals(args[parsedArg])) ;//filterMeta = OreDictionary.WILDCARD_VALUE; //for clarity
                     else {
@@ -125,8 +129,10 @@ public class CommandFill extends InCommandBase {
                     }
                     parsedArg++;
                 } else argAdjust++;
+                //TODO: parse NBTfilter
+                argAdjust++;
             }
-            if (args.length > 11 - argAdjust) {
+            if (args.length > 13 - argAdjust) {
                 if (REPLACEMODESTRS.contains(args[parsedArg])) {
                     for (ComMode c : ComMode.values()) {
                         if (c.name.equalsIgnoreCase(args[parsedArg])) {
@@ -156,10 +162,13 @@ public class CommandFill extends InCommandBase {
                     if (isInner && fillMode == ComMode.OUTLINE) continue;
                     b = w.getBlock(x, y, z);
                     bMeta = w.getBlockMetadata(x, y, z);
-                    if (replaceFiltered)
+                    if (replaceFiltered) {
+                        //TODO: filter tag option
+                        //TODO: filter data
                         if (filterBlock != b
                             || (filterMeta != OreDictionary.WILDCARD_VALUE && filterMeta != bMeta))
                             continue;
+                    }
                     if (fillMode == ComMode.KEEP) {
                         if (!b.isAir(w, x, y, z)) continue;
                     }
@@ -174,6 +183,7 @@ public class CommandFill extends InCommandBase {
                         || (bMeta != (isInner ? innerMeta : resultMeta))) {
                         w.setBlock(x, y, z, isInner ? innerBlock : result,
                             isInner ? innerMeta : resultMeta, flags);
+                        //TODO: write NBT
                         changedBlocks++;
                     }
                 }
@@ -186,10 +196,12 @@ public class CommandFill extends InCommandBase {
     @Override
     public List<String> addTabCompletionOptions(ICommandSender sender, String[] args) {
         List<String> result = new ArrayList<>(3);
-        int i = args.length, argAdjust = 1; //xyzxyzBrBMS //argadjust for omitting metas, also off-by-one in my case
+        int i = args.length, argAdjust = 0; //xyzxyzBrBMS //argadjust for omitting metas, also off-by-one in my case
         if (i > 7 && args[7].matches("\\d")) argAdjust++;
+        if (i > 8 + argAdjust && args[8 + argAdjust].startsWith("{") ) argAdjust++;
         if (i > 9 + argAdjust && args[9 + argAdjust].matches(META_REGEX)) argAdjust++; //allow metas being optional
-        switch(i - argAdjust) {
+        if (i > 10 + argAdjust && args[8 + argAdjust].startsWith("{") ) argAdjust++;
+        switch(i - argAdjust - 1) {
             case 0, 3: result.add("~ ~ ~"); break;
             case 1, 4: result.add("~ ~"); break;
             case 2, 5: result.add("~"); break;
