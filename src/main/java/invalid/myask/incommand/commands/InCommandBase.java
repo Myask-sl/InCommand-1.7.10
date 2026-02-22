@@ -2,10 +2,12 @@ package invalid.myask.incommand.commands;
 
 import net.minecraft.command.CommandBase;
 import net.minecraft.command.ICommandSender;
+import net.minecraft.command.PlayerNotFoundException;
 import net.minecraft.command.PlayerSelector;
 import net.minecraft.command.SyntaxErrorException;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.util.Vec3;
 
@@ -40,6 +42,16 @@ public abstract class InCommandBase extends CommandBase {
         else
         {
             throw new SyntaxErrorException("Somehow executing command from not-Entity.");
+        }
+    }
+
+    public static Entity getOnePlayerOrEntity(ICommandSender sender, String arg) {
+        EntityPlayer player;
+        try {
+            player = getPlayer(sender, arg);
+            return player;
+        } catch (PlayerNotFoundException e) {
+            return matchOneEntity(sender, arg);
         }
     }
 

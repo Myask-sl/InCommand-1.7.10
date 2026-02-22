@@ -5,23 +5,32 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import cpw.mods.fml.common.Loader;
+import cpw.mods.fml.common.ModContainer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.Language;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.potion.Potion;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.biome.BiomeGenBase;
+import net.minecraftforge.common.DimensionManager;
 
 public class IDDictionary {
 
     public static final Map<String, Integer> enchDict = new HashMap<>();
     public static final Map<String, Integer> enchLocalDict = new HashMap<>();
+
     public static final Map<String, Integer> effDict = new HashMap<>();
     public static final Map<String, Integer> effLocalDict = new HashMap<>();
+
     public static final Map<String, Integer> romanDict = new HashMap<>();
+
     public static final Map<String, Integer> biomeDict = new HashMap<>();
     public static final HashMap<String, Integer> biomeNameMap = new HashMap<>();
     public static ArrayList<String> biomeNameList;
+
+    public static final Map<String, Integer> dimDict = new HashMap<>();
+
     public static Language effLang, enchLang;
 
     public static void initEnchDict() {
@@ -97,12 +106,38 @@ public class IDDictionary {
         }
         biomeNameList = new ArrayList<>(biomeNameMap.keySet());
     }
+    public static void initDimDict() {
+        //dimDict.clear(); //can't clear it, since we're putting in on registration rather than scanning!
+        int provID;
+        dimDict.put("Overworld", 0);
+        dimDict.put("The Nether", -1);
+        dimDict.put("The End", 1);
+        /*
+        for (int i = 2; i < Config.last_dimension_id; i++) {
+            if (DimensionManager.isDimensionRegistered(i)) {
+                provID = DimensionManager.getProviderType(i);
+                dimDict.put(DimensionManager.createProviderFor(provID).getDimensionName(), i);
+            }
+        }
+        */
+    }
+    public static void noteDim(int id, int providerType) {
+        String dimName = DimensionManager.createProviderFor(providerType).getDimensionName();
+        dimName = dimName.replace(' ', '_');
+        dimDict.put(dimName, id);
+        if (Config.modid_dimension_dictionary) {
+            ModContainer mc = Loader.instance().activeModContainer();
+            String modID = mc == null ? "minecraft" : mc.getModId();
+            dimDict.put(modID + ":" + dimName, id);
+        }
+    }
 
     public static void refreshAllDicts() {
         initEnchDict();
         initEffDict();
         initRomanDict();
         initBiomeDict();
+        initDimDict();
     }
 
     public static String lookUpEnchant(String arg) {
@@ -165,5 +200,9 @@ public class IDDictionary {
         if ("@s".equals(s)) return Minecraft.getMinecraft().thePlayer.getCommandSenderName();
 //        if ("@n".equals(s)) return Minecraft.getMinecraft().theWorld.getEntit
         return s;
+    }
+
+    public static Integer lookupDimension(String arg) {
+        return dimDict.get(arg);
     }
 }

@@ -61,6 +61,14 @@ commands.rotate.success.facing.coordinates=/rotated %s to face (%f, %f, %f)
 commands.rotate.success.facing.entity=/rotated %s to face %s.
 commands.rotate.success.angles=/rotated %s to yaw %f, pitch %f.
 
+commands.warp.usage="/warp [target] (dimension)": warps target to dimension. Warps sender if no target provided.\n Dimension numeric id (e.g. -1 for Nether, 0 for Overworld) or name permitted.
+commands.warp.failure.args.few=/warp arguments incomplete. 
+commands.warp.failure.dimension.dne=Dimension "%s" does not exist!
+commands.warp.failure.entity.dne=Target "%s" does not exist!
+commands.warp.failure.nether.forbidden=/warp failed: Nether forbidden by this server's settings! 
+commands.warp.success=Successfully /warped %s to %s.
+commands.warp.success.already="Successfully" /warped %s to %s [was already there].
+
 commands.wood.usage="/wood (no arguments)": drops four saplings. 10 minute (12000 tick) default cooldown.
 commands.wood.failure.hasty=/wood not cooled down yet!
 commands.wood.success=Gave four [oak] saplings.

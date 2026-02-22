@@ -5,7 +5,8 @@
   "refmap": "mixins.incommand.refmap.json",
   "target": "@env(DEFAULT)",
   "compatibilityLevel": "JAVA_8",
-  "mixins": ["MixinCommandEnchant", "MixinCommandEffect", "MixinChestGenHooks", "MixinEntityLiving_lootpeek"],
+  "mixins": ["MixinCommandEnchant", "MixinCommandEffect", "MixinChestGenHooks", "MixinDimensionManager",
+    "MixinEntityLiving_lootpeek"],
   "client": ["MixinGuiChat"],
   "server": []
 }

@@ -16,6 +16,7 @@ import invalid.myask.incommand.commands.CommandKillOther;
 import invalid.myask.incommand.commands.CommandLoot;
 import invalid.myask.incommand.commands.CommandRotate;
 import invalid.myask.incommand.commands.CommandRotateSelf;
+import invalid.myask.incommand.commands.CommandWarp;
 import invalid.myask.incommand.commands.CommandWood;
 import invalid.myask.incommand.network.RotatePlayerMessage;
 import invalid.myask.incommand.network.RotatePlayerMessageHandler;
@@ -63,6 +64,8 @@ public class CommonProxy {
             rules.addGameRule("max_block_modifications", "32768");
             rules.addGameRule("max_block_meta", "15");
         }
+        if (Config.warp_enable)
+            event.registerServerCommand(CommandWarp.instance);
 
         event.registerServerCommand(CommandCoordTest.instance);
     }

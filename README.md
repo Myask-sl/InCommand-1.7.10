@@ -22,6 +22,8 @@ Two little give commands from alpha (``/iron`` and ``/wood``). As originally imp
 
 ``/fill`` for mass-block-setting needs from 1.8, including the 1.21.5 enhancements to replace mode. ``max_block_modifications`` gamerule added accordingly; and also ``max_block_meta`` gamerule for altering top end when a meta-ID-extender is in place. NBT writing/tag filtering Not Yet Impl.
 
-~~``/clone``
+~~``/clone``~~
+
+``/warp`` for dimension change from April Fools' Day, but with a target. (*Caveat emptor*, a bit buggy.)
 
 Limited support for ``@s`` selector in e.g. enchant/effect, new commands.
