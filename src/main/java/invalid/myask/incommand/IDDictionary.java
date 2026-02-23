@@ -101,14 +101,13 @@ public class IDDictionary {
         for (BiomeGenBase biome : BiomeGenBase.getBiomeGenArray()) {
             if (biome != null && !biome.biomeName.isEmpty()) {
                 String underscored = biome.biomeName.replace(' ', '_');
-                biomeNameMap.put(biome.biomeName, biome.biomeID);
+                biomeNameMap.put(underscored, biome.biomeID);
             }
         }
         biomeNameList = new ArrayList<>(biomeNameMap.keySet());
     }
     public static void initDimDict() {
         //dimDict.clear(); //can't clear it, since we're putting in on registration rather than scanning!
-        int provID;
         dimDict.put("Overworld", 0);
         dimDict.put("The_Nether", -1);
         dimDict.put("The_End", 1);
