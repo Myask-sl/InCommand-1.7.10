@@ -110,8 +110,13 @@ public class IDDictionary {
         //dimDict.clear(); //can't clear it, since we're putting in on registration rather than scanning!
         int provID;
         dimDict.put("Overworld", 0);
-        dimDict.put("The Nether", -1);
-        dimDict.put("The End", 1);
+        dimDict.put("The_Nether", -1);
+        dimDict.put("The_End", 1);
+        if (Config.modid_dimension_dictionary) {
+            dimDict.put("minecraft:Overworld", 0);
+            dimDict.put("minecraft:The_Nether", -1);
+            dimDict.put("minecraft:The_End", 1);
+        }
         /*
         for (int i = 2; i < Config.last_dimension_id; i++) {
             if (DimensionManager.isDimensionRegistered(i)) {
